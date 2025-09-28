@@ -15,7 +15,9 @@ import 'repositories/cart_repository.dart';
 import 'repositories/favorites_repository.dart';
 import 'services/local_storage_service.dart';
 import 'services/api_service.dart';
+import 'services/connectivity_service.dart';
 import 'screens/home_screen.dart';
+import 'widgets/connectivity_wrapper.dart';
 import 'utils/themes.dart';
 import 'utils/constants.dart';
 
@@ -43,6 +45,9 @@ Future<void> _initializeServices() async {
 
   // Initialize local storage
   await getIt<LocalStorageService>().init();
+
+  // Initialize connectivity service
+  await ConnectivityService().initialize();
 
   // Register repositories
   getIt.registerSingleton<ProductRepository>(
@@ -89,7 +94,7 @@ class EcommerceApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: AppThemes.lightTheme,
         themeMode: ThemeMode.system,
-        home: const HomeScreen(),
+        home: const ConnectivityWrapper(child: HomeScreen()),
       ),
     );
   }

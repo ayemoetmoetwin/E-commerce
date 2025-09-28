@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../models/product_model.dart';
 import '../bloc/cart/cart_bloc.dart';
 import '../bloc/cart/cart_event.dart';
@@ -61,18 +62,21 @@ class VerticalProductCard extends StatelessWidget {
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(AppConstants.defaultBorderRadius),
                   ),
-                  child: Image.network(
-                    product.imageUrl,
+                  child: CachedNetworkImage(
+                    imageUrl: product.imageUrl,
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return const Center(
-                        child: Icon(
-                          Icons.image_not_supported,
-                          size: 50,
-                          color: AppColors.iconGrey,
-                        ),
-                      );
-                    },
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primary,
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => const Center(
+                      child: Icon(
+                        Icons.image_not_supported,
+                        size: 50,
+                        color: AppColors.iconGrey,
+                      ),
+                    ),
                   ),
                 )
               : const Center(
@@ -306,18 +310,21 @@ class GridProductCard extends StatelessWidget {
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(AppConstants.defaultBorderRadius),
                   ),
-                  child: Image.network(
-                    product.imageUrl,
+                  child: CachedNetworkImage(
+                    imageUrl: product.imageUrl,
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return const Center(
-                        child: Icon(
-                          Icons.image_not_supported,
-                          size: 30,
-                          color: AppColors.iconGrey,
-                        ),
-                      );
-                    },
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primary,
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => const Center(
+                      child: Icon(
+                        Icons.image_not_supported,
+                        size: 30,
+                        color: AppColors.iconGrey,
+                      ),
+                    ),
                   ),
                 )
               : const Center(

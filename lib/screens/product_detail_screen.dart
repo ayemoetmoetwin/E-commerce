@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../models/product_model.dart';
 import '../bloc/cart/cart_bloc.dart';
 import '../bloc/cart/cart_event.dart';
@@ -91,18 +92,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       width: double.infinity,
       color: AppColors.iconGreyLight,
       child: widget.product.imageUrl.isNotEmpty
-          ? Image.network(
-              widget.product.imageUrl,
+          ? CachedNetworkImage(
+              imageUrl: widget.product.imageUrl,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return const Center(
-                  child: Icon(
-                    Icons.image_not_supported,
-                    size: 100,
-                    color: AppColors.iconGrey,
-                  ),
-                );
-              },
+              placeholder: (context, url) => const Center(
+                child: CircularProgressIndicator(color: AppColors.primary),
+              ),
+              errorWidget: (context, url, error) => const Center(
+                child: Icon(
+                  Icons.image_not_supported,
+                  size: 100,
+                  color: AppColors.iconGrey,
+                ),
+              ),
             )
           : const Center(
               child: Icon(
@@ -140,7 +142,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: widget.product.inStock ? AppColors.textGreen : AppColors.error,
+                  color: widget.product.inStock
+                      ? AppColors.textGreen
+                      : AppColors.error,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -240,7 +244,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           const SizedBox(width: 16),
           Container(
-            height:40,
+            height: 40,
             decoration: BoxDecoration(
               border: Border.all(color: AppColors.iconGrey),
               borderRadius: BorderRadius.circular(8),
@@ -294,7 +298,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 }
               : null,
           style: ElevatedButton.styleFrom(
-            backgroundColor: widget.product.inStock ? AppColors.primary : AppColors.iconGrey,
+            backgroundColor: widget.product.inStock
+                ? AppColors.primary
+                : AppColors.iconGrey,
             foregroundColor: AppColors.secondary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
