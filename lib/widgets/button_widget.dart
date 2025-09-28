@@ -19,23 +19,24 @@ class ShareButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 40,
+      height: 40,
       margin: const EdgeInsets.only(right: 2),
       decoration: BoxDecoration(
-        color: AppColors.secondary.withOpacity(0.7),
+        color: AppColors.secondary.withValues(alpha: 0.7),
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.1),
+            color: AppColors.iconGrey.withValues(alpha: 0.3),
             blurRadius: 4,
-            offset: const Offset(0, 4),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: IconButton(
         onPressed: onPressed,
         icon: Icon(Icons.share, color: iconColor),
-        iconSize: 20,
-        constraints: const BoxConstraints(minWidth: 24, minHeight: 24),
+        iconSize: 18,
       ),
     );
   }
@@ -50,7 +51,7 @@ class FavoriteButton extends StatelessWidget {
     super.key,
     required this.product,
     this.iconSize = 18,
-    this.buttonSize = 32,
+    this.buttonSize = 24,
   });
 
   @override
@@ -61,9 +62,18 @@ class FavoriteButton extends StatelessWidget {
             state is FavoritesLoaded && state.isFavorite(product.id);
 
         return Container(
+          width: 40,
+          height: 40,
           decoration: BoxDecoration(
-            color: AppColors.secondary.withOpacity(0.9),
+            color: AppColors.secondary.withValues(alpha: 0.7),
             shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.iconGrey.withValues(alpha: 0.3),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
           child: IconButton(
             onPressed: () {
@@ -71,13 +81,9 @@ class FavoriteButton extends StatelessWidget {
             },
             icon: Icon(
               isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: isFavorite ? AppColors.favorite : AppColors.iconGrey,
+              color: isFavorite ? AppColors.favorite : AppColors.primary,
             ),
             iconSize: iconSize,
-            constraints: BoxConstraints(
-              minWidth: buttonSize,
-              minHeight: buttonSize,
-            ),
           ),
         );
       },

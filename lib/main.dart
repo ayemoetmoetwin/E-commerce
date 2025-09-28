@@ -88,7 +88,6 @@ class EcommerceApp extends StatelessWidget {
         title: AppConstants.appName,
         debugShowCheckedModeBanner: false,
         theme: AppThemes.lightTheme,
-        darkTheme: AppThemes.darkTheme,
         themeMode: ThemeMode.system,
         home: const HomeScreen(),
       ),

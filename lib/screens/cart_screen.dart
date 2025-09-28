@@ -4,6 +4,7 @@ import '../bloc/cart/cart_bloc.dart';
 import '../bloc/cart/cart_event.dart';
 import '../bloc/cart/cart_state.dart';
 import '../models/cart_item_model.dart';
+import '../utils/colors.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -24,7 +25,7 @@ class CartScreen extends StatelessWidget {
                   },
                   child: const Text(
                     'Clear',
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(color: AppColors.favorite),
                   ),
                 );
               }
@@ -47,7 +48,11 @@ class CartScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
+                  Icon(
+                    Icons.error_outline,
+                    size: 64,
+                    color: AppColors.favorite,
+                  ),
                   const SizedBox(height: 16),
                   Text(
                     'Error loading cart',
@@ -74,7 +79,11 @@ class CartScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.shopping_cart_outlined, size: 100, color: Colors.grey),
+          Icon(
+            Icons.shopping_cart_outlined,
+            size: 100,
+            color: AppColors.iconGrey,
+          ),
           SizedBox(height: 16),
           Text(
             'Your cart is empty',
@@ -87,7 +96,7 @@ class CartScreen extends StatelessWidget {
           SizedBox(height: 8),
           Text(
             'Add some products to get started',
-            style: TextStyle(fontSize: 16, color: Colors.grey),
+            style: TextStyle(fontSize: 16, color: AppColors.iconGrey),
           ),
         ],
       ),
@@ -114,6 +123,7 @@ class CartScreen extends StatelessWidget {
 
   Widget _buildCartItem(BuildContext context, CartItem cartItem) {
     return Card(
+      color: AppColors.secondaryDark,
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -127,7 +137,7 @@ class CartScreen extends StatelessWidget {
               height: 80,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: Colors.grey[200],
+                color: AppColors.iconGreyLight,
               ),
               child: cartItem.product.imageUrl.isNotEmpty
                   ? ClipRRect(
@@ -138,12 +148,15 @@ class CartScreen extends StatelessWidget {
                         errorBuilder: (context, error, stackTrace) {
                           return const Icon(
                             Icons.image_not_supported,
-                            color: Colors.grey,
+                            color: AppColors.iconGrey,
                           );
                         },
                       ),
                     )
-                  : const Icon(Icons.image_not_supported, color: Colors.grey),
+                  : const Icon(
+                      Icons.image_not_supported,
+                      color: AppColors.iconGrey,
+                    ),
             ),
             const SizedBox(width: 16),
             // Product Details
@@ -162,21 +175,21 @@ class CartScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '\$${cartItem.product.price.toStringAsFixed(2)}',
+                    '${cartItem.product.price.toStringAsFixed(0)} MMK',
                     style: const TextStyle(
-                      color: Colors.green,
+                      color: AppColors.textGreen,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 14,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  // Quantity Controls
                   Row(
                     children: [
                       Container(
+                        height: 40,
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(color: AppColors.iconGrey),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -199,7 +212,6 @@ class CartScreen extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              width: 40,
                               padding: const EdgeInsets.symmetric(vertical: 4),
                               child: Text(
                                 cartItem.quantity.toString(),
@@ -228,7 +240,6 @@ class CartScreen extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      // Remove Button
                       IconButton(
                         onPressed: () {
                           context.read<CartBloc>().add(
@@ -237,7 +248,7 @@ class CartScreen extends StatelessWidget {
                         },
                         icon: const Icon(
                           Icons.delete_outline,
-                          color: Colors.red,
+                          color: AppColors.favorite,
                         ),
                       ),
                     ],
@@ -260,10 +271,10 @@ class CartScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.secondary,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: AppColors.iconGrey.withValues(alpha: 0.2),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, -3),
@@ -283,11 +294,11 @@ class CartScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                '\$${total.toStringAsFixed(2)}',
+                '${total.toStringAsFixed(0)} MMK',
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.green,
+                  color: AppColors.textGreen,
                 ),
               ),
             ],
@@ -295,13 +306,12 @@ class CartScreen extends StatelessWidget {
           const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
-            height: 50,
             child: ElevatedButton(
               onPressed: () {
                 _showCheckoutDialog(context, total);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -337,7 +347,10 @@ class CartScreen extends StatelessWidget {
                 context.read<CartBloc>().add(ClearCart());
                 Navigator.of(context).pop();
               },
-              child: const Text('Clear', style: TextStyle(color: Colors.red)),
+              child: const Text(
+                'Clear',
+                style: TextStyle(color: AppColors.favorite),
+              ),
             ),
           ],
         );
@@ -367,7 +380,7 @@ class CartScreen extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Order placed successfully!'),
-                    backgroundColor: Colors.green,
+                    backgroundColor: AppColors.success,
                   ),
                 );
               },

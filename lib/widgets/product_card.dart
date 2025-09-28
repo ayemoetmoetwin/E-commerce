@@ -95,7 +95,6 @@ class VerticalProductCard extends StatelessWidget {
             ],
           ),
         ),
-        // Stock status
         if (!product.inStock)
           Positioned(
             bottom: 8,
@@ -116,7 +115,6 @@ class VerticalProductCard extends StatelessWidget {
               ),
             ),
           ),
-        // Rating badge
         if (product.rating > 0)
           Positioned(
             bottom: 8,
@@ -124,7 +122,7 @@ class VerticalProductCard extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.7),
+                color: AppColors.primary.withValues(alpha: 0.7),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
@@ -153,7 +151,7 @@ class VerticalProductCard extends StatelessWidget {
       onPressed: () {
         context.read<ProductBloc>().add(ShareProduct(product));
       },
-      iconColor: AppColors.iconGrey,
+      iconColor: AppColors.primary,
     );
   }
 
@@ -187,13 +185,12 @@ class VerticalProductCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 8),
-          // Price and rating row
           Row(
             children: [
               Text(
                 product.price.currency,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: AppColors.success,
+                  color: AppColors.primary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -216,7 +213,6 @@ class VerticalProductCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          // Add to cart button
           if (showAddToCartButton) _buildAddToCartButton(context),
         ],
       ),
@@ -245,7 +241,7 @@ class VerticalProductCard extends StatelessWidget {
         ),
         style: ElevatedButton.styleFrom(
           backgroundColor: product.inStock
-              ? AppColors.success
+              ? AppColors.primary
               : AppColors.iconGrey,
           foregroundColor: AppColors.secondary,
           shape: RoundedRectangleBorder(
@@ -332,7 +328,6 @@ class GridProductCard extends StatelessWidget {
                   ),
                 ),
         ),
-        // Action buttons
         Positioned(
           top: 4,
           right: 4,
@@ -358,11 +353,7 @@ class GridProductCard extends StatelessWidget {
   }
 
   Widget _buildFavoriteButton(BuildContext context) {
-    return FavoriteButton(
-      product: product,
-      iconSize: 20,
-      buttonSize: 20,
-    );
+    return FavoriteButton(product: product, iconSize: 20, buttonSize: 20);
   }
 
   Widget _buildProductInfo(BuildContext context) {
@@ -441,21 +432,28 @@ class GridProductCard extends StatelessWidget {
                       color: AppColors.transparent,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(8),
-                        onTap: product.inStock
-                            ? () {
-                                context.read<CartBloc>().add(
-                                  AddToCart(product: product, quantity: 1),
-                                );
-                                AppHelpers.showSuccessSnackBar(
-                                  context,
-                                  '${product.name} added to cart',
-                                );
-                              }
-                            : null,
-                        child: const Center(
+                        onTap: () {
+                          if (product.inStock) {
+                            context.read<CartBloc>().add(
+                              AddToCart(product: product, quantity: 1),
+                            );
+                            AppHelpers.showSuccessSnackBar(
+                              context,
+                              '${product.name} added to cart',
+                            );
+                          } else {
+                            AppHelpers.showErrorSnackBar(
+                              context,
+                              '${product.name} is out of stock',
+                            );
+                          }
+                        },
+                        child: Center(
                           child: Icon(
-                            Icons.shopping_cart,
-                            color: AppColors.secondary,
+                            Icons.add_shopping_cart,
+                            color: product.inStock
+                                ? AppColors.secondary
+                                : AppColors.iconGrey,
                             size: 22,
                             weight: 600,
                           ),

@@ -147,8 +147,7 @@ class CartRepository {
 
   Future<void> removeCoupon() async {
     try {
-      // Remove coupon logic would go here
-      // For now, we'll just return success
+      // Coupon removal functionality not implemented
     } catch (e) {
       throw Exception('Failed to remove coupon: $e');
     }

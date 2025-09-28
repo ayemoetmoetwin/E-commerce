@@ -23,6 +23,7 @@ class AppColors {
   static const Color textHint = Color(0xFF999999);
   static const Color textOnPrimary = Colors.white;
   static const Color textOnSecondary = Colors.black;
+  static const Color textGreen = Color(0xFF00A72A);
 
   // Accent Colors
   static const Color accent = Color(0xFF007AFF);
@@ -66,6 +67,7 @@ class AppColors {
   static const Color iconOnSecondary = Colors.black;
   static const Color iconGrey = Color(0xFF616161);
   static const Color iconGreyLight = Color(0xFFEEEEEE);
+  static const Color grey_500 = Color(0xFF9E9E9E);
 
   // Rating Colors
   static const Color rating = Color(0xFFFFD700);
@@ -73,6 +75,8 @@ class AppColors {
 
   // Favorite Colors
   static const Color favorite = Color(0xFFFF3B30);
+  static const Color favoritelight = Color(0xFFBF342D);
+  static const Color favoriteDark = Color(0xFFFF3B30);
   static const Color favoriteEmpty = Color(0xFFCCCCCC);
 
   // Gradient Colors
@@ -96,7 +100,7 @@ class AppColors {
 
   // Helper methods
   static Color withOpacity(Color color, double opacity) {
-    return color.withOpacity(opacity);
+    return color.withValues(alpha: opacity);
   }
 
   static Color darken(Color color, [double amount = 0.1]) {

@@ -4,6 +4,7 @@ import '../bloc/favorites/favorites_bloc.dart';
 import '../bloc/favorites/favorites_event.dart';
 import '../bloc/favorites/favorites_state.dart';
 import '../widgets/product_card.dart';
+import '../utils/colors.dart';
 import 'product_detail_screen.dart';
 
 class FavoritesScreen extends StatelessWidget {
@@ -26,7 +27,7 @@ class FavoritesScreen extends StatelessWidget {
                   },
                   child: const Text(
                     'Clear All',
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(color: AppColors.favorite),
                   ),
                 );
               }
@@ -49,7 +50,11 @@ class FavoritesScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
+                  Icon(
+                    Icons.error_outline,
+                    size: 64,
+                    color: AppColors.favoritelight,
+                  ),
                   const SizedBox(height: 16),
                   Text(
                     'Error loading favorites',
@@ -83,20 +88,20 @@ class FavoritesScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.favorite_border, size: 100, color: Colors.grey),
+          Icon(Icons.favorite_border, size: 100, color: AppColors.iconGrey),
           SizedBox(height: 16),
           Text(
             'No favorites yet',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.grey,
+              color: AppColors.iconGrey,
             ),
           ),
           SizedBox(height: 8),
           Text(
             'Add products to your favorites to see them here',
-            style: TextStyle(fontSize: 16, color: Colors.grey),
+            style: TextStyle(fontSize: 16, color: AppColors.iconGrey),
           ),
         ],
       ),
@@ -146,7 +151,10 @@ class FavoritesScreen extends StatelessWidget {
                 context.read<FavoritesBloc>().add(const ClearFavorites());
                 Navigator.of(context).pop();
               },
-              child: const Text('Clear', style: TextStyle(color: Colors.red)),
+              child: const Text(
+                'Clear',
+                style: TextStyle(color: AppColors.favorite),
+              ),
             ),
           ],
         );

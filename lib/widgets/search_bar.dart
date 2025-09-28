@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../utils/constants.dart';
+import '../utils/colors.dart';
 
 class SearchBar extends StatefulWidget {
   final String hintText;
@@ -82,7 +83,7 @@ class _SearchBarState extends State<SearchBar> {
         borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: AppColors.iconGrey.withValues(alpha: 0.5),
             spreadRadius: 1,
             blurRadius: 4,
             offset: const Offset(0, 2),
@@ -98,12 +99,12 @@ class _SearchBarState extends State<SearchBar> {
           hintText: widget.hintText,
           hintStyle: Theme.of(
             context,
-          ).textTheme.bodyMedium?.copyWith(color: Colors.grey[500]),
-          prefixIcon: Icon(Icons.search, color: Colors.grey[600]),
+          ).textTheme.bodyMedium?.copyWith(color: AppColors.iconGrey),
+          prefixIcon: Icon(Icons.search, color: AppColors.grey_500),
           suffixIcon: _isSearching
               ? IconButton(
                   onPressed: _onClear,
-                  icon: Icon(Icons.clear, color: Colors.grey[600]),
+                  icon: Icon(Icons.clear, color: AppColors.iconGrey),
                 )
               : null,
           border: OutlineInputBorder(
@@ -231,7 +232,7 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar>
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
-        return Container(
+        return SizedBox(
           height: 48,
           child: Row(
             children: [
@@ -359,7 +360,7 @@ class _SearchBarWithFiltersState extends State<SearchBarWithFilters> {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
+                  color: AppColors.iconGrey.withValues(alpha: 0.1),
                   spreadRadius: 1,
                   blurRadius: 4,
                   offset: const Offset(0, 2),
@@ -378,7 +379,7 @@ class _SearchBarWithFiltersState extends State<SearchBarWithFilters> {
                       child: Container(
                         padding: const EdgeInsets.all(2),
                         decoration: const BoxDecoration(
-                          color: Colors.red,
+                          color: AppColors.favorite,
                           shape: BoxShape.circle,
                         ),
                         constraints: const BoxConstraints(
@@ -388,7 +389,7 @@ class _SearchBarWithFiltersState extends State<SearchBarWithFilters> {
                         child: Text(
                           widget.filterCount.toString(),
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: AppColors.secondary,
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
                           ),

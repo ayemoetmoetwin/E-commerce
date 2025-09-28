@@ -10,6 +10,7 @@ import '../bloc/favorites/favorites_event.dart';
 import '../bloc/favorites/favorites_state.dart';
 import '../utils/helpers.dart';
 import 'cart_screen.dart';
+import '../utils/colors.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final Product product;
@@ -28,7 +29,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Details'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: AppColors.secondary,
         actions: [
           // Share button
           IconButton(
@@ -47,7 +48,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               return IconButton(
                 icon: Icon(
                   isFavorite ? Icons.favorite : Icons.favorite_border,
-                  color: isFavorite ? Colors.red : null,
+                  color: isFavorite ? AppColors.favorite : null,
                 ),
                 onPressed: () {
                   context.read<FavoritesBloc>().add(
@@ -88,7 +89,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return Container(
       height: 300,
       width: double.infinity,
-      color: Colors.grey[200],
+      color: AppColors.iconGreyLight,
       child: widget.product.imageUrl.isNotEmpty
           ? Image.network(
               widget.product.imageUrl,
@@ -98,7 +99,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   child: Icon(
                     Icons.image_not_supported,
                     size: 100,
-                    color: Colors.grey,
+                    color: AppColors.iconGrey,
                   ),
                 );
               },
@@ -107,7 +108,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: Icon(
                 Icons.image_not_supported,
                 size: 100,
-                color: Colors.grey,
+                color: AppColors.iconGrey,
               ),
             ),
     );
@@ -129,9 +130,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           Row(
             children: [
               Text(
-                '\$${widget.product.price.toStringAsFixed(2)}',
+                '${widget.product.price.toStringAsFixed(0)} MMK',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Colors.green,
+                  color: AppColors.textGreen,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -139,13 +140,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: widget.product.inStock ? Colors.green : Colors.red,
+                  color: widget.product.inStock ? AppColors.textGreen : AppColors.error,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   widget.product.inStock ? 'In Stock' : 'Out of Stock',
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: AppColors.secondary,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
@@ -156,7 +157,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           const SizedBox(height: 16),
           Row(
             children: [
-              const Icon(Icons.star, color: Colors.amber, size: 20),
+              const Icon(Icons.star, color: AppColors.rating, size: 20),
               const SizedBox(width: 4),
               Text(
                 '4.5', // This would come from product rating
@@ -167,7 +168,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 '(128 reviews)', // This would come from product reviews
                 style: Theme.of(
                   context,
-                ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
+                ).textTheme.bodySmall?.copyWith(color: AppColors.iconGrey),
               ),
             ],
           ),
@@ -239,8 +240,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           const SizedBox(width: 16),
           Container(
+            height:40,
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
+              border: Border.all(color: AppColors.iconGrey),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -253,7 +255,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   icon: const Icon(Icons.remove),
                 ),
                 Container(
-                  width: 50,
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     quantity.toString(),
@@ -282,7 +283,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         child: ElevatedButton(
           onPressed: widget.product.inStock
               ? () {
-                  // Add to cart using BLoC
                   context.read<CartBloc>().add(
                     AddToCart(product: widget.product, quantity: quantity),
                   );
@@ -294,8 +294,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 }
               : null,
           style: ElevatedButton.styleFrom(
-            backgroundColor: widget.product.inStock ? Colors.blue : Colors.grey,
-            foregroundColor: Colors.white,
+            backgroundColor: widget.product.inStock ? AppColors.primary : AppColors.iconGrey,
+            foregroundColor: AppColors.secondary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),

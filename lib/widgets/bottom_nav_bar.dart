@@ -5,6 +5,7 @@ import '../bloc/cart/cart_state.dart';
 import '../bloc/favorites/favorites_bloc.dart';
 import '../bloc/favorites/favorites_state.dart';
 import '../utils/constants.dart';
+import '../utils/colors.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -18,7 +19,7 @@ class BottomNavBar extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: AppColors.iconGrey.withValues(alpha: 0.2),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, -3),
@@ -31,7 +32,7 @@ class BottomNavBar extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         elevation: 0,
         selectedItemColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Colors.grey[600],
+        unselectedItemColor: AppColors.iconGrey,
         selectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: 12,
@@ -64,7 +65,7 @@ class BottomNavBar extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(2),
                           decoration: const BoxDecoration(
-                            color: Colors.red,
+                            color: AppColors.favorite,
                             shape: BoxShape.circle,
                           ),
                           constraints: const BoxConstraints(
@@ -74,7 +75,7 @@ class BottomNavBar extends StatelessWidget {
                           child: Text(
                             itemCount > 99 ? '99+' : itemCount.toString(),
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: AppColors.secondary,
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
                             ),
@@ -103,7 +104,7 @@ class BottomNavBar extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(2),
                           decoration: const BoxDecoration(
-                            color: Colors.red,
+                            color: AppColors.favorite,
                             shape: BoxShape.circle,
                           ),
                           constraints: const BoxConstraints(
@@ -113,7 +114,7 @@ class BottomNavBar extends StatelessWidget {
                           child: Text(
                             itemCount > 99 ? '99+' : itemCount.toString(),
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: AppColors.secondary,
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
                             ),
@@ -145,7 +146,7 @@ class BottomNavBar extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(2),
                           decoration: const BoxDecoration(
-                            color: Colors.red,
+                            color: AppColors.favorite,
                             shape: BoxShape.circle,
                           ),
                           constraints: const BoxConstraints(
@@ -157,7 +158,7 @@ class BottomNavBar extends StatelessWidget {
                                 ? '99+'
                                 : favoriteCount.toString(),
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: AppColors.secondary,
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
                             ),
@@ -186,7 +187,7 @@ class BottomNavBar extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(2),
                           decoration: const BoxDecoration(
-                            color: Colors.red,
+                            color: AppColors.favorite,
                             shape: BoxShape.circle,
                           ),
                           constraints: const BoxConstraints(
@@ -198,7 +199,7 @@ class BottomNavBar extends StatelessWidget {
                                 ? '99+'
                                 : favoriteCount.toString(),
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: AppColors.secondary,
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
                             ),
@@ -240,7 +241,7 @@ class CustomBottomNavBar extends StatelessWidget {
             Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: AppColors.iconGrey.withValues(alpha: 0.2),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, -3),
@@ -270,7 +271,7 @@ class CustomBottomNavBar extends StatelessWidget {
                         isSelected ? item.activeIcon : item.icon,
                         color: isSelected
                             ? Theme.of(context).primaryColor
-                            : Colors.grey[600],
+                            : AppColors.iconGrey,
                         size: 24,
                       ),
                       if (item.badgeCount != null && item.badgeCount! > 0)
@@ -280,7 +281,7 @@ class CustomBottomNavBar extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.all(2),
                             decoration: const BoxDecoration(
-                              color: Colors.red,
+                              color: AppColors.favorite,
                               shape: BoxShape.circle,
                             ),
                             constraints: const BoxConstraints(
@@ -292,7 +293,7 @@ class CustomBottomNavBar extends StatelessWidget {
                                   ? '99+'
                                   : item.badgeCount.toString(),
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: AppColors.secondary,
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -308,7 +309,7 @@ class CustomBottomNavBar extends StatelessWidget {
                     style: TextStyle(
                       color: isSelected
                           ? Theme.of(context).primaryColor
-                          : Colors.grey[600],
+                          : AppColors.iconGrey,
                       fontSize: 12,
                       fontWeight: isSelected
                           ? FontWeight.w600

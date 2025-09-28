@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'constants.dart';
 
 class AppThemes {
@@ -6,18 +7,17 @@ class AppThemes {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
+      fontFamily: GoogleFonts.poppins().fontFamily,
       colorScheme: ColorScheme.fromSeed(
         seedColor: Colors.black,
         brightness: Brightness.light,
         primary: Colors.black,
         secondary: Colors.white,
         surface: Colors.white,
-        background: Colors.white,
         error: Colors.red,
         onPrimary: Colors.white,
         onSecondary: Colors.black,
         onSurface: Colors.black,
-        onBackground: Colors.black,
         onError: Colors.white,
       ),
       appBarTheme: const AppBarTheme(
@@ -113,116 +113,6 @@ class AppThemes {
     );
   }
 
-  static ThemeData get darkTheme {
-    return ThemeData(
-      useMaterial3: true,
-      brightness: Brightness.dark,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.black,
-        brightness: Brightness.dark,
-        primary: Colors.black,
-        secondary: Colors.white,
-        surface: const Color(0xFF1E1E1E),
-        background: const Color(0xFF121212),
-        error: Colors.red,
-        onPrimary: Colors.white,
-        onSecondary: Colors.black,
-        onSurface: Colors.white,
-        onBackground: Colors.white,
-        onError: Colors.white,
-      ),
-      appBarTheme: const AppBarTheme(
-        centerTitle: true,
-        elevation: 0,
-        scrolledUnderElevation: 1,
-      ),
-      cardTheme: CardThemeData(
-        elevation: AppConstants.defaultElevation,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
-        ),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          elevation: AppConstants.defaultElevation,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              AppConstants.defaultBorderRadius,
-            ),
-          ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppConstants.largePadding,
-            vertical: AppConstants.defaultPadding,
-          ),
-        ),
-      ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              AppConstants.defaultBorderRadius,
-            ),
-          ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppConstants.largePadding,
-            vertical: AppConstants.defaultPadding,
-          ),
-        ),
-      ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              AppConstants.defaultBorderRadius,
-            ),
-          ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppConstants.largePadding,
-            vertical: AppConstants.defaultPadding,
-          ),
-        ),
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
-          borderSide: BorderSide(color: Colors.grey.shade600),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
-          borderSide: const BorderSide(color: Colors.blue, width: 2),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
-          borderSide: const BorderSide(color: Colors.red),
-        ),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: AppConstants.defaultPadding,
-          vertical: AppConstants.defaultPadding,
-        ),
-      ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        type: BottomNavigationBarType.fixed,
-        elevation: 8,
-      ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        elevation: AppConstants.defaultElevation,
-      ),
-      snackBarTheme: SnackBarThemeData(
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
-        ),
-      ),
-      dialogTheme: DialogThemeData(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
-        ),
-      ),
-    );
-  }
 }
 
 class AppColors {

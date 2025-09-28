@@ -141,7 +141,6 @@ class ProductRepository {
       }
     } catch (e) {
       // Silently fail - we already have local data
-      print('Failed to refresh products from API: $e');
     }
   }
 
@@ -178,9 +177,9 @@ class ProductRepository {
         category: 'Electronics',
         brand: 'Apple',
         sku: 'IPH15PRO-128',
-        inStock: true,
-        stockQuantity: 25,
-        rating: 4.8,
+        inStock: false,
+        stockQuantity: 0,
+        rating: 4.0,
         reviewCount: 1247,
         tags: ['smartphone', 'apple', 'premium', 'camera'],
         createdAt: DateTime.now().subtract(const Duration(days: 30)),

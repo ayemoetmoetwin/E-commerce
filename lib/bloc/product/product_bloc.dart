@@ -214,8 +214,7 @@ Check out this amazing product in our ecommerce app! 🛒
             '${event.product.name} - \$${event.product.price.toStringAsFixed(2)}',
       );
     } catch (e) {
-      // Handle share error silently or emit error state if needed
-      print('Failed to share product: $e');
+      // Handle share error silently
     }
   }
 }

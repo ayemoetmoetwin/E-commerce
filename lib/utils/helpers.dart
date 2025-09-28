@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import 'constants.dart';
+import 'colors.dart';
 
 class AppHelpers {
   // Format currency
@@ -9,7 +10,7 @@ class AppHelpers {
     double amount, {
     String symbol = AppConstants.currencySymbol,
   }) {
-    final formatter = NumberFormat('#,##0.00');
+    final formatter = NumberFormat('#,##0');
     return '${formatter.format(amount)} $symbol';
   }
 
@@ -142,6 +143,7 @@ class AppHelpers {
         content: Text(message),
         backgroundColor: backgroundColor,
         behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
         ),
@@ -151,22 +153,22 @@ class AppHelpers {
 
   // Show success snackbar
   static void showSuccessSnackBar(BuildContext context, String message) {
-    showSnackBar(context, message, backgroundColor: Colors.green);
+    showSnackBar(context, message, backgroundColor: AppColors.success);
   }
 
   // Show error snackbar
   static void showErrorSnackBar(BuildContext context, String message) {
-    showSnackBar(context, message, backgroundColor: Colors.red);
+    showSnackBar(context, message, backgroundColor: AppColors.error);
   }
 
   // Show warning snackbar
   static void showWarningSnackBar(BuildContext context, String message) {
-    showSnackBar(context, message, backgroundColor: Colors.orange);
+    showSnackBar(context, message, backgroundColor: AppColors.warning);
   }
 
   // Show info snackbar
   static void showInfoSnackBar(BuildContext context, String message) {
-    showSnackBar(context, message, backgroundColor: Colors.blue);
+    showSnackBar(context, message, backgroundColor: AppColors.info);
   }
 
   // Show confirmation dialog
